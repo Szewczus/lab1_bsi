@@ -6,6 +6,7 @@ import com.example.lab1_bsi.serwisy.CreateUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
@@ -18,9 +19,10 @@ public class CreateUserCotroller {
         User userModel = createUserService.saveUser(userDto);
         return ResponseEntity.ok(userModel);
     }
-
     @GetMapping("/")
-    RedirectView home() {
-        return new RedirectView("index.html");
+    public String redirectWithUsingRedirectView(
+            RedirectAttributes attributes) {
+        return "Jestes zalogowany :)";
     }
+
 }
