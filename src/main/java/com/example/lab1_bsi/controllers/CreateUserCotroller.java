@@ -14,8 +14,6 @@ public class CreateUserCotroller {
     @Autowired
     CreateUserService createUserService;
 
-
-
     @PostMapping("/create/user")
     ResponseEntity saveUser(@RequestBody UserDto userDto){
         User userModel = createUserService.saveUser(userDto);
