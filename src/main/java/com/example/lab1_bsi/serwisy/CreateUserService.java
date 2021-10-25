@@ -41,7 +41,7 @@ public class CreateUserService implements UserDetailsService {
             userModel.setIsHMAC(userDto.getIsHMAC());
             userModel.setSalt(userDto.getSalt());
             userModel.setKeyToHMAC(userDto.getKeyToHMAC());
-            if(userDto.getIsHMAC()==true){
+            if(userDto.getIsHMAC()){
                 //haszujemy hasło przez HMAC
                 EncoderHMAC encoderHMAC = new EncoderHMAC();
                 userModel.setPasswordHash("{hmac}"+encoderHMAC.encode(userDto.getPasswordHash()));
