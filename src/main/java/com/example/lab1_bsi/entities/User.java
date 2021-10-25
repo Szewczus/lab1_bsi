@@ -22,6 +22,6 @@ public class User {
     private Boolean isHMAC;
     @Column(name = "key_to_HMAC")
     private String keyToHMAC;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Password>passwordSet;
 }

@@ -14,5 +14,4 @@ public class UserDto {
     private String salt;
     private Boolean isHMAC;
     private String keyToHMAC;
-    private Long userIdFk;
 }

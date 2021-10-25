@@ -17,4 +17,5 @@ public class PasswordDto {
     private String webAddress;
     private String description;
     private String login;
+    private Long userFK;
 }

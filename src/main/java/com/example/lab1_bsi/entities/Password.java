@@ -18,10 +18,9 @@ public class Password {
     @Column(name = "web_address")
     private String webAddress;
     private String description;
-    @Column(unique = true)
     private String login;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
 }
