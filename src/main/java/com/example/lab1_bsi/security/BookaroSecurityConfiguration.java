@@ -27,7 +27,7 @@ public class BookaroSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable(); // 1
         http
                 .authorizeRequests()
-                .antMatchers("/create/user").permitAll() // 2
+                .antMatchers("/api/create/user").permitAll() // 2
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll().and().httpBasic(); // 3

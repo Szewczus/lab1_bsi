@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
+@RequestMapping("/api")
 public class CreateUserCotroller {
     @Autowired
     UserService userService;
