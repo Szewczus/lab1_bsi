@@ -3,7 +3,7 @@ package com.example.lab1_bsi.serwisy;
 public class SingletonPasswordStore {
 
     private static SingletonPasswordStore instance;
-    public String value;
+    public String password;
     public static SingletonPasswordStore getInstance() {
         if (instance == null) {
             instance = new SingletonPasswordStore();
@@ -11,9 +11,9 @@ public class SingletonPasswordStore {
         return instance;
     }
     public String getPassword(){
-        return value;
+        return password;
     }
     public void setPassword(String value){
-        this.value = value;
+        this.password = value;
     }
 }
