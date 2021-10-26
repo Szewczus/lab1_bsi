@@ -1,13 +1,11 @@
 package com.example.lab1_bsi.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Password {
@@ -23,4 +21,23 @@ public class Password {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getWebAddress() {
+        return webAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getLogin() {
+        return login;
+    }
 }

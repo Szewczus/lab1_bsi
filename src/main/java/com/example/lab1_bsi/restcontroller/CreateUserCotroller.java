@@ -1,4 +1,4 @@
-package com.example.lab1_bsi.controllers;
+package com.example.lab1_bsi.restcontroller;
 
 import com.example.lab1_bsi.dto.UserDto;
 import com.example.lab1_bsi.entities.User;
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 public class CreateUserCotroller {

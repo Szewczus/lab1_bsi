@@ -11,6 +11,8 @@ import java.security.NoSuchAlgorithmException;
 public class SHA512 implements PasswordEncoder {
     @Override
     public String encode(CharSequence charSequence) {
+//        SingletonPasswordStore singletonPasswordStore = SingletonPasswordStore.getInstance();
+//        singletonPasswordStore.setPassword(charSequence.toString());
         return calculateSHA512(charSequence.toString());
     }
 
