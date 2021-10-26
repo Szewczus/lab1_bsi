@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Service
-public class SHA512 implements PasswordEncoder {
+public class EncodeSHA512 implements PasswordEncoder {
     @Override
     public String encode(CharSequence charSequence) {
 //        SingletonPasswordStore singletonPasswordStore = SingletonPasswordStore.getInstance();

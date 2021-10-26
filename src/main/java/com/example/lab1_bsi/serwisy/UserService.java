@@ -4,28 +4,17 @@ import com.example.lab1_bsi.dto.UserDto;
 import com.example.lab1_bsi.entities.User;
 import com.example.lab1_bsi.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
 @Service
-public class CreateUserService implements UserDetailsService {
+public class UserService implements UserDetailsService {
     private static final Random RANDOM = new SecureRandom();
     @Autowired
     UserRepository userRepository;
@@ -49,7 +38,7 @@ public class CreateUserService implements UserDetailsService {
             else
             {
                 //haszujemy hasło przez SHA512
-                SHA512 encoder = new SHA512();
+                EncodeSHA512 encoder = new EncodeSHA512();
                 //userModel.setPasswordHash("{sha512}"+encoder.encode(generateRandomPepper(5)+userDto.getSalt()+userDto.getPasswordHash()));
                 userModel.setPasswordHash("{sha512}"+encoder.encode(userDto.getPasswordHash()));
             }

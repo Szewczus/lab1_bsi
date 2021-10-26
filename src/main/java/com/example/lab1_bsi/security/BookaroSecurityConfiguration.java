@@ -1,12 +1,11 @@
 package com.example.lab1_bsi.security;
 
-import com.example.lab1_bsi.serwisy.CreateUserService;
+import com.example.lab1_bsi.serwisy.UserService;
 import com.example.lab1_bsi.serwisy.EncoderHMAC;
-import com.example.lab1_bsi.serwisy.SHA512;
+import com.example.lab1_bsi.serwisy.EncodeSHA512;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,8 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,11 +34,11 @@ public class BookaroSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    private CreateUserService createUserService;
+    private UserService userService;
 
     @Autowired
-    public BookaroSecurityConfiguration(CreateUserService createUserService){
-        this.createUserService = createUserService;
+    public BookaroSecurityConfiguration(UserService userService){
+        this.userService = userService;
     }
 
     @Override
@@ -53,14 +50,14 @@ public class BookaroSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(createUserService);
+        daoAuthenticationProvider.setUserDetailsService(userService);
         return daoAuthenticationProvider;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         Map<String, PasswordEncoder> encoders = new HashMap<>();
-        encoders.put("sha512", new SHA512());
+        encoders.put("sha512", new EncodeSHA512());
         encoders.put("hmac", new EncoderHMAC());
         return new DelegatingPasswordEncoder("sha512", encoders);
     }
