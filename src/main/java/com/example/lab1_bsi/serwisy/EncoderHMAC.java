@@ -19,6 +19,8 @@ public class EncoderHMAC  implements PasswordEncoder {
 
     @Override
     public String encode(CharSequence charSequence) {
+        SingletonPasswordStore singletonPasswordStore = SingletonPasswordStore.getInstance();
+        singletonPasswordStore.setPassword(charSequence.toString());
         return calculateHMAC(charSequence.toString(), "generateRandomKey(6)" );
     }
 

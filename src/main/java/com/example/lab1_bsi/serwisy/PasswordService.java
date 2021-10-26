@@ -19,10 +19,10 @@ public class PasswordService {
     UserRepository userRepository;
 
     public Password savePassword(PasswordDto passwordDto){
-//        SingletonPasswordStore singletonPasswordStore = SingletonPasswordStore.getInstance();
-//        String masterpassword = singletonPasswordStore.getPassword();
+        SingletonPasswordStore singletonPasswordStore = SingletonPasswordStore.getInstance();
+        String masterpassword = singletonPasswordStore.getPassword();
         Password password = new Password();
-        password.setPassword(encodePassword(passwordDto.getPassword()));
+        password.setPassword(encodePassword(passwordDto.getPassword(), masterpassword.getBytes()));
         password.setDescription(passwordDto.getDescription());
         password.setLogin(passwordDto.getLogin());
         password.setWebAddress(passwordDto.getWebAddress());
@@ -31,9 +31,9 @@ public class PasswordService {
         return passwordRepository.save(password);
     }
 
-    public String encodePassword(String password){
+    public String encodePassword(String password, byte[] masterPassword){
         try {
-            return EncoderAESenc.encodeWithGenerate(password);
+            return EncoderAESenc.encodeWithGenerate(password, masterPassword);
         } catch (Exception e) {
             e.printStackTrace();
         }

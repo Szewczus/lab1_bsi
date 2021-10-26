@@ -27,14 +27,16 @@ public class EncoderAESenc {
         return new String(decValue);
     }
     // Generate a new encryption key.
-    public static Key generateKey() throws Exception {
+    public static Key generateKey(byte[] keyValue) throws Exception {
         return new SecretKeySpec(keyValue, ALGO);
     }
 
-    public static String encodeWithGenerate(String password){
+    public static String encodeWithGenerate(String password, byte[] keyValue){
         Key key = null;
         try {
-            key = generateKey();
+            EncodeMD5 encodeMD5 = new EncodeMD5();
+            keyValue = encodeMD5.calculateMD5(keyValue.toString());
+            key = generateKey(keyValue);
             String encrypted = encrypt(password, key);
             return encrypted;
         } catch (Exception e) {
