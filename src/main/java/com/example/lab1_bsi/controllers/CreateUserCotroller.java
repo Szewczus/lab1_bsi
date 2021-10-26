@@ -1,4 +1,4 @@
-package com.example.lab1_bsi.restcontroller;
+package com.example.lab1_bsi.controllers;
 
 import com.example.lab1_bsi.dto.UserDto;
 import com.example.lab1_bsi.entities.User;
