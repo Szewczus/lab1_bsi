@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class EncodeMD5 {
-    public byte[] calculateMD5(String text) {
+    public static byte[] calculateMD5(String text) {
             MessageDigest md = null;
             try {
                 md = MessageDigest.getInstance("MD5");

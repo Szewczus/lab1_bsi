@@ -8,10 +8,7 @@ import com.example.lab1_bsi.serwisy.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,8 +17,14 @@ public class PasswordController {
     PasswordService passwordService;
 
     @PostMapping("/create/password")
-    ResponseEntity saveUser(@RequestBody PasswordDto passwordDto){
+    ResponseEntity savePassword(@RequestBody PasswordDto passwordDto){
         Password password = passwordService.savePassword(passwordDto);
         return ResponseEntity.ok(password);
+    }
+
+    @GetMapping("/decode/{password}")
+    ResponseEntity decodePassword(@PathVariable(name = "password")String password){
+        String decodedPassword = passwordService.decodePassword(password);
+        return ResponseEntity.ok(decodedPassword);
     }
 }

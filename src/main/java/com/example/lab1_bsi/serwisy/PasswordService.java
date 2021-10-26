@@ -8,6 +8,9 @@ import com.example.lab1_bsi.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 @Service
 public class PasswordService {
     @Autowired
@@ -37,6 +40,18 @@ public class PasswordService {
             return EncoderAESenc.encodeWithGenerate(password, masterPassword);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String decodePassword(String password){
+        SingletonPasswordStore singletonPasswordStore = SingletonPasswordStore.getInstance();
+        String masterpassword = singletonPasswordStore.getPassword();
+        try {
+            return EncoderAESenc.decodeWithGenerate(password, masterpassword);
+        }
+        catch (Exception exception){
+            Logger.getLogger(PasswordService.class.getName()).log(Level.SEVERE, null, exception);
         }
         return null;
     }

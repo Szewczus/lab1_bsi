@@ -33,17 +33,23 @@ public class EncoderAESenc {
 
 
     private static Key generateKey(String masterPassword) throws Exception {
-        EncodeMD5 encodeMD5 = new EncodeMD5();
-        return new SecretKeySpec(encodeMD5.calculateMD5(masterPassword), ALGO);
+        return new SecretKeySpec(EncodeMD5.calculateMD5(masterPassword), ALGO);
     }
-
 
     public static String encodeWithGenerate(String password, String masterPassword){
         Key key = null;
         try {
             key = generateKey(masterPassword);
-            String encrypted = encrypt(password, key);
-            return encrypted;
+            return encrypt(password, key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String decodeWithGenerate(String password, String masterPassword){
+        try {
+            return  decrypt(password, generateKey(masterPassword));
         } catch (Exception e) {
             e.printStackTrace();
         }
