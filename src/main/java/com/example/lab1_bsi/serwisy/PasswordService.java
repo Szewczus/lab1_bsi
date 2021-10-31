@@ -72,8 +72,8 @@ public class PasswordService {
             org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
             String loginFromSession = principal.getUsername();
             User userFromSession =  userRepository.findUserByLogin(loginFromSession);//pobieram użytkownika z sesji
-            Long userFK = userFromSession.getId();
-            return passwordRepository.findPasswordsById(userFK);
+            User user = userFromSession;
+            return passwordRepository.findPasswordsByUser(user);
         }
         return null;
     }
