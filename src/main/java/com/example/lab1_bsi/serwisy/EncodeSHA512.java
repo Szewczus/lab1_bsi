@@ -18,7 +18,14 @@ public class EncodeSHA512 implements PasswordEncoder {
 
     @Override
     public boolean matches(CharSequence charSequence, String s) {
-        return encode(charSequence).equals(s);
+        boolean matches = encode(charSequence).equals(s);
+        if(matches){
+            System.out.println("zalogowany");
+        }
+        else {
+            System.out.println("bledny login lub hasło");
+        }
+        return matches;
     }
 
     @Override

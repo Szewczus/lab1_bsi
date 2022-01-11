@@ -14,4 +14,7 @@ import java.util.List;
 public interface PasswordRepository extends JpaRepository<Password, Long> {
     public List <Password> findPasswordsById(Long id);
     public List <Password> findPasswordsByUser(User user);
+    @Modifying
+    @Query("update Password p set p.password = :newPassword where p.password = :oldPassword")
+    void updateUserPassword(String newPassword, String oldPassword);
 }

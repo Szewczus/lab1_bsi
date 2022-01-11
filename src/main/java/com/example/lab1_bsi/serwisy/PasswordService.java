@@ -23,8 +23,11 @@ public class PasswordService {
     @Autowired
     PasswordRepository passwordRepository;
 
-    @Autowired
     UserRepository userRepository;
+
+    public PasswordService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     public Password savePassword(PasswordDto passwordDto){
         //wyciagam hasło mastera z singletona w którym zapisałam dane przed zaodowaniem hasła
@@ -51,6 +54,10 @@ public class PasswordService {
 
     public String decodePassword(String password){
         String masterpassword = getMasterPassword();
+        return decodePasswordByMasterPassword(password, masterpassword);
+    }
+
+    private String decodePasswordByMasterPassword(String password, String masterpassword) {
         try {
             return EncoderAESenc.decodeWithGenerate(password, masterpassword);
         }
@@ -77,4 +84,5 @@ public class PasswordService {
         }
         return null;
     }
+
 }

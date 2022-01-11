@@ -5,17 +5,24 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class EncoderHMAC  implements PasswordEncoder {
     private static final Random RANDOM = new SecureRandom();
     private static final String HMAC_SHA512 = "HmacSHA512";
+    private static final Logger log =  Logger.getLogger("EncoderHMAC");
 
     @Override
     public String encode(CharSequence charSequence) {
@@ -26,7 +33,25 @@ public class EncoderHMAC  implements PasswordEncoder {
 
     @Override
     public boolean matches(CharSequence charSequence, String s) {
-        return encode(charSequence).equals(s);
+        boolean matches = encode(charSequence).equals(s);
+        SingletonPasswordStore singletonPasswordStore = SingletonPasswordStore.getInstance();
+        if(matches){
+            System.out.println("zalogowany");
+            singletonPasswordStore.setLoggedIn(true);
+        }
+        else {
+            System.out.println("bledny login lub hasło");
+            singletonPasswordStore.setLoggedIn(false);
+        }
+
+        LocalDateTime localDateTime =LocalDateTime.now();
+        singletonPasswordStore.setLoggingTime(localDateTime);
+        try {
+            singletonPasswordStore.setIp(InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            log.log( Level.SEVERE, "error:", e );
+        }
+        return matches;
     }
 
     @Override

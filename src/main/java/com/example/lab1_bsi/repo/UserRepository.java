@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public Boolean existsUserByLogin(String login);
     public User findUserByLogin(String login);
     public User findUserById(Long id);
+    @Modifying
+    @Query("update User u set u.passwordHash = :passwordHash")
+    void setUserPasswordHash(String passwordHash);
 }
